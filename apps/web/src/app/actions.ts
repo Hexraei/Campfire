@@ -1,8 +1,8 @@
 "use server";
 
-import { auth } from "@clerk/nextjs/server";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 import { db } from "@/db";
-import { userPreferences } from "@/db/schema";
+import { userPreferences, users } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 export async function savePollPreferences(categories: string[]) {
@@ -17,10 +17,39 @@ export async function savePollPreferences(categories: string[]) {
   }
 
   try {
-    // Check if preferences already exist for this user
-    const existing = await db.select().from(userPreferences).where(eq(userPreferences.userId, userId));
+    // RACE CONDITION FIX: Ensure user exists in our DB before inserting preferences
+    // Sometimes the frontend calls this before the Clerk Webhook has finished creating the user
+    const existingUser = await db.select().from(users).where(eq(users.id, userId));
+    
+    if (existingUser.length === 0) {
+      // User doesn't exist yet! Fetch their profile from Clerk immediately
+      const client = await clerkClient();
+      const clerkUser = await client.users.getUser(userId);
+      const email = clerkUser.emailAddresses[0]?.emailAddress;
+      
+      if (email) {
+        const name = [clerkUser.firstName, clerkUser.lastName].filter(Boolean).join(" ") || null;
+        const imageUrl = clerkUser.imageUrl || null;
+        
+        // Upsert into users table just to be safe
+        await db.insert(users).values({
+          id: userId,
+          email,
+          name,
+          imageUrl,
+        }).onConflictDoUpdate({
+          target: users.id,
+          set: { email, name, imageUrl }
+        });
+      } else {
+        throw new Error("Could not fetch user email from Clerk");
+      }
+    }
 
-    if (existing.length > 0) {
+    // Now it is perfectly safe to save the preferences
+    const existingPref = await db.select().from(userPreferences).where(eq(userPreferences.userId, userId));
+
+    if (existingPref.length > 0) {
       await db
         .update(userPreferences)
         .set({ categories })
