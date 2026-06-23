@@ -1,4 +1,4 @@
-import { pgTable, varchar, text, integer, timestamp, serial } from "drizzle-orm/pg-core";
+import { pgTable, varchar, text, integer, timestamp, serial, jsonb } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
 // 1. Users Table (Synchronized with Clerk user profiles)
@@ -8,6 +8,16 @@ export const users = pgTable("users", {
   name: varchar("name", { length: 256 }),
   imageUrl: varchar("image_url", { length: 1024 }),
   trustScore: integer("trust_score").default(100).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+// Waitlist Preferences (Tracks product category votes before/during signup)
+export const userPreferences = pgTable("user_preferences", {
+  id: serial("id").primaryKey(),
+  userId: varchar("user_id", { length: 256 })
+    .references(() => users.id, { onDelete: "cascade" })
+    .notNull(),
+  categories: jsonb("categories").notNull(), // Stores array of category IDs
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -115,6 +125,11 @@ export const usersRelations = relations(users, ({ many }) => ({
   answers: many(answers),
   discussions: many(discussions),
   discussionReplies: many(discussionReplies),
+  preferences: many(userPreferences),
+}));
+
+export const userPreferencesRelations = relations(userPreferences, ({ one }) => ({
+  user: one(users, { fields: [userPreferences.userId], references: [users.id] }),
 }));
 
 export const productsRelations = relations(products, ({ many }) => ({

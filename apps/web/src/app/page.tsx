@@ -1,11 +1,30 @@
 "use client";
 
-import { useState } from "react";
-import { SignInButton, SignUpButton, Show, UserButton } from "@clerk/nextjs";
+import { useState, useEffect } from "react";
+import { SignInButton, SignUpButton, Show, UserButton, useAuth, useClerk } from "@clerk/nextjs";
+import { savePollPreferences } from "./actions";
 
 export default function Home() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [isPollDone, setIsPollDone] = useState(false);
+  const { isSignedIn } = useAuth();
+  const clerk = useClerk();
+
+  useEffect(() => {
+    if (isSignedIn) {
+      const pendingVote = localStorage.getItem("pending_vote");
+      if (pendingVote) {
+        try {
+          const categories = JSON.parse(pendingVote);
+          savePollPreferences(categories);
+          localStorage.removeItem("pending_vote");
+          setIsPollDone(true);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
+  }, [isSignedIn]);
 
   const categories = [
     { id: "laptops", name: "Laptops & Notebooks" },
@@ -21,8 +40,14 @@ export default function Home() {
     );
   };
 
-  const handlePollDone = () => {
+  const handlePollDone = async () => {
     setIsPollDone(true);
+    if (isSignedIn) {
+      await savePollPreferences(selectedCategories);
+    } else {
+      localStorage.setItem("pending_vote", JSON.stringify(selectedCategories));
+      clerk.openSignUp();
+    }
   };
 
   const scrollToRegistry = () => {
