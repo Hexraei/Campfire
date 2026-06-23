@@ -67,3 +67,24 @@ export async function savePollPreferences(categories: string[]) {
     return { success: false, error: "Database error" };
   }
 }
+
+export async function getPollPreferences() {
+  const { userId } = await auth();
+
+  if (!userId) {
+    return { success: false, data: null };
+  }
+
+  try {
+    const existingPref = await db.select().from(userPreferences).where(eq(userPreferences.userId, userId));
+    
+    if (existingPref.length > 0) {
+      return { success: true, data: existingPref[0].categories as string[] };
+    }
+    
+    return { success: true, data: null };
+  } catch (error) {
+    console.error("Error fetching preferences:", error);
+    return { success: false, data: null };
+  }
+}

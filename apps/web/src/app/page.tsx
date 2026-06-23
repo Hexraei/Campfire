@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { SignInButton, SignUpButton, SignOutButton, Show, UserButton, useAuth, useClerk } from "@clerk/nextjs";
-import { savePollPreferences } from "./actions";
+import { SignInButton, SignUpButton, Show, UserButton, useAuth, useClerk } from "@clerk/nextjs";
+import { savePollPreferences, getPollPreferences } from "./actions";
 
 export default function Home() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -12,16 +12,26 @@ export default function Home() {
 
   useEffect(() => {
     if (isSignedIn) {
+      // First, check if there's a pending vote that needs to be saved
       const pendingVote = localStorage.getItem("pending_vote");
       if (pendingVote) {
         try {
           const categories = JSON.parse(pendingVote);
           savePollPreferences(categories);
           localStorage.removeItem("pending_vote");
+          setSelectedCategories(categories);
           setIsPollDone(true);
         } catch (e) {
           console.error(e);
         }
+      } else {
+        // If no pending vote, try to load their existing vote from the DB
+        getPollPreferences().then((res) => {
+          if (res.success && res.data && res.data.length > 0) {
+            setSelectedCategories(res.data);
+            setIsPollDone(true);
+          }
+        });
       }
     }
   }, [isSignedIn]);
@@ -101,11 +111,7 @@ export default function Home() {
                 <span className="text-[9px] md:text-xs text-stone-500 font-semibold bg-stone-100 border border-stone-200 px-2 py-0.5 md:px-3 md:py-1 rounded-full">
                   Founding Member
                 </span>
-                <SignOutButton>
-                  <button className="text-[10px] md:text-xs font-medium text-stone-500 hover:text-stone-900 transition-colors cursor-pointer px-2 py-1 bg-stone-100 hover:bg-stone-200 rounded-full">
-                    Sign Out
-                  </button>
-                </SignOutButton>
+                <UserButton />
               </div>
             </Show>
           </div>
