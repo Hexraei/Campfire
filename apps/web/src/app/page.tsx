@@ -4,20 +4,25 @@ import { useState } from "react";
 import { SignInButton, SignUpButton, Show, UserButton } from "@clerk/nextjs";
 
 export default function Home() {
-  const [voted, setVoted] = useState<string | null>(null);
-  const [categories, setCategories] = useState([
-    { id: "laptops", name: "Laptops & Notebooks", votes: 4821 },
-    { id: "smartphones", name: "Smartphones & Mobile Devices", votes: 3912 },
-    { id: "audio", name: "Headphones & Audio Gear", votes: 2489 },
-    { id: "keyboards", name: "Mechanical Keyboards", votes: 1823 },
-  ]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [isPollDone, setIsPollDone] = useState(false);
 
-  const handleVote = (id: string) => {
-    if (voted) return;
-    setVoted(id);
-    setCategories((prev) =>
-      prev.map((c) => (c.id === id ? { ...c, votes: c.votes + 1 } : c))
+  const categories = [
+    { id: "laptops", name: "Laptops & Notebooks" },
+    { id: "smartphones", name: "Smartphones & Mobile Devices" },
+    { id: "audio", name: "Headphones & Audio Gear" },
+    { id: "keyboards", name: "Mechanical Keyboards" },
+  ];
+
+  const handleToggleCategory = (id: string) => {
+    if (isPollDone) return;
+    setSelectedCategories((prev) =>
+      prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id]
     );
+  };
+
+  const handlePollDone = () => {
+    setIsPollDone(true);
   };
 
   const scrollToRegistry = () => {
@@ -86,12 +91,12 @@ export default function Home() {
             </div>
 
             {/* Core Narrative Headline */}
-            <h1 className="text-3xl md:text-6xl font-serif font-extrabold tracking-tight leading-[1.1] text-stone-900 text-wrap-balance">
-              The internet broke word-of-mouth.
+            <h1 className="text-3xl md:text-5xl font-serif font-extrabold tracking-tight leading-[1.1] text-stone-900 text-wrap-balance">
+              Finding honest product reviews shouldn't be this hard.
             </h1>
             
-            <p className="text-base md:text-xl text-stone-600 leading-relaxed font-serif text-wrap-pretty">
-              Fake reviews, search engine ads, and affiliate commission kickbacks have made finding honest product feedback impossible. Campfire connects you directly with verified owners who actually use the products you want to buy.
+            <p className="text-base md:text-lg text-stone-600 leading-relaxed font-serif text-wrap-pretty">
+              It's hard to tell what's real online anymore. Between sponsored content and SEO articles, finding a genuine opinion is frustrating. Campfire connects you directly with verified owners who actually use the products you're looking for.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 mt-1.5">
@@ -108,7 +113,7 @@ export default function Home() {
                   onClick={scrollToRegistry}
                   className="w-full sm:w-auto text-center text-sm font-bold text-stone-900 bg-white border border-stone-200 hover:bg-stone-50 transition-colors rounded-full px-6 py-3.5 shadow-sm active:scale-97 cursor-pointer"
                 >
-                  View Your Registry Node
+                  View Registration Status
                 </button>
               </Show>
             </div>
@@ -116,50 +121,46 @@ export default function Home() {
 
           {/* Core Narrative / Friction Step with Connected Layout */}
           <section className="p-6 md:p-8 rounded-3xl border border-stone-200/80 bg-white/70 backdrop-blur-sm shadow-[0_8px_30px_rgb(0,0,0,0.02)] hover:border-stone-300/80 transition-all duration-350 flex flex-col gap-6 md:gap-8">
-            <h2 className="text-xl font-serif font-bold text-stone-850">The Modern Purchase Loop</h2>
+            <h2 className="text-xl font-serif font-bold text-stone-850">The typical buying experience</h2>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 relative before:hidden sm:before:block before:absolute before:top-2.5 before:left-[10%] before:right-[10%] before:h-[1px] before:bg-gradient-to-r before:from-stone-200 before:via-stone-300 before:to-orange-200 z-0">
               <div className="flex flex-col gap-2 relative z-10 bg-white/40 md:bg-transparent rounded-2xl p-5 md:p-0 border border-stone-200/40 md:border-transparent">
                 <div className="text-xs font-mono font-bold text-stone-400 flex items-center gap-2">
                   <span className="w-5 h-5 rounded-full border border-stone-300 bg-white flex items-center justify-center text-[10px] text-stone-500 font-bold shadow-sm">1</span>
-                  <span>STEP 01</span>
                 </div>
-                <div className="font-serif font-bold text-sm text-stone-850 mt-2">The Research Hunt</div>
+                <div className="font-serif font-bold text-sm text-stone-850 mt-2">Searching for opinions</div>
                 <p className="text-xs text-stone-500 leading-relaxed">
-                  You spend hours scrolling community threads trying to isolate real opinions from promotional bots.
+                  You spend time reading threads trying to figure out which comments are from actual users and which ones are promotional.
                 </p>
               </div>
 
               <div className="flex flex-col gap-2 relative z-10 bg-white/40 md:bg-transparent rounded-2xl p-5 md:p-0 border border-stone-200/40 md:border-transparent">
                 <div className="text-xs font-mono font-bold text-stone-400 flex items-center gap-2">
                   <span className="w-5 h-5 rounded-full border border-stone-300 bg-white flex items-center justify-center text-[10px] text-stone-500 font-bold shadow-sm">2</span>
-                  <span>STEP 02</span>
                 </div>
-                <div className="font-serif font-bold text-sm text-stone-850 mt-2">The Affiliate Gimmick</div>
+                <div className="font-serif font-bold text-sm text-stone-850 mt-2">Sifting through articles</div>
                 <p className="text-xs text-stone-500 leading-relaxed">
-                  You browse directories that promise honest comparisons but only link to products with active commission payouts.
+                  You browse "top 10" lists that are mostly just linking to whatever pays the best affiliate commission.
                 </p>
               </div>
 
               <div className="flex flex-col gap-2 relative z-10 bg-white/40 md:bg-transparent rounded-2xl p-5 md:p-0 border border-stone-200/40 md:border-transparent">
                 <div className="text-xs font-mono font-bold text-stone-400 flex items-center gap-2">
                   <span className="w-5 h-5 rounded-full border border-stone-300 bg-white flex items-center justify-center text-[10px] text-stone-500 font-bold shadow-sm">3</span>
-                  <span>STEP 03</span>
                 </div>
-                <div className="font-serif font-bold text-sm text-stone-850 mt-2">The Review Video</div>
+                <div className="font-serif font-bold text-sm text-stone-850 mt-2">Watching videos</div>
                 <p className="text-xs text-stone-500 leading-relaxed">
-                  You watch breakdowns where reviewers highlight positive aspects because their equipment was supplied by the manufacturer.
+                  You watch reviews from creators who received the product for free, making it hard to trust if it's truly worth your own money.
                 </p>
               </div>
 
               <div className="flex flex-col gap-2 relative z-10 bg-[#fefaf6] border border-orange-200/60 rounded-2xl p-5 shadow-sm md:shadow-sm">
                 <div className="text-xs font-mono font-bold text-orange-700 flex items-center gap-2">
                   <span className="w-5 h-5 rounded-full border border-orange-300 bg-white flex items-center justify-center text-[10px] text-orange-750 font-bold shadow-sm">4</span>
-                  <span>STEP 04</span>
                 </div>
-                <div className="font-serif font-bold text-sm text-stone-850 mt-2">The Realization</div>
+                <div className="font-serif font-bold text-sm text-stone-850 mt-2">Making a guess</div>
                 <p className="text-xs text-stone-500 leading-relaxed font-medium text-orange-900">
-                  You buy the product. It degrades within months. No public rating warned you because reviews rarely look back.
+                  You eventually just buy it and hope for the best, because finding a genuine long-term review is too difficult.
                 </p>
               </div>
             </div>
@@ -276,10 +277,10 @@ export default function Home() {
             <div className="flex-1 flex flex-col gap-5 w-full">
               <div className="flex flex-col gap-3">
                 <h2 className="text-xl md:text-3xl font-serif font-extrabold text-stone-900 leading-tight">
-                  Authenticity through validation.
+                  Real reviews from real owners.
                 </h2>
                 <p className="text-xs md:text-base text-stone-600 leading-relaxed font-serif">
-                  Campfire is built on verified ownership. We require proof of purchase—like a simple store invoice upload—to unlock posting rights. If you haven't owned the product, you can't post about it. Period.
+                  Campfire requires a simple proof of purchase to unlock posting rights. This keeps things honest: if someone hasn't bought the product, they can't review it. It's a simple idea to bring back trust.
                 </p>
               </div>
 
@@ -300,10 +301,10 @@ export default function Home() {
                       d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.745 3.745 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
                     />
                   </svg>
-                  <span>Verification Privacy Pledge</span>
+                  <span>We care about privacy</span>
                 </div>
                 <p className="text-[10px] md:text-xs text-stone-500 leading-relaxed font-mono">
-                  We verify using automated OCR extraction. Billing details, prices, and addresses are instantly redacted and discarded. We only store the product model and purchase date to validate ownership. No receipt images are kept on our public servers.
+                  When you upload a receipt, we only look at the product name and purchase date to verify ownership. All personal details, addresses, and prices are ignored and discarded. We never store receipt images.
                 </p>
               </div>
             </div>
@@ -312,34 +313,48 @@ export default function Home() {
             <div className="w-full md:w-[350px] p-5 md:p-6 rounded-3xl border border-stone-200 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.03)] hover:border-stone-300/90 transition-all duration-300 flex flex-col gap-3.5">
               <div>
                 <h3 className="font-serif font-bold text-stone-800 text-sm">Where should we start?</h3>
-                <p className="text-[10px] md:text-xs text-stone-500 mt-1">Select the product category you would like to see launched first.</p>
+                <p className="text-[10px] md:text-xs text-stone-500 mt-1">Select the product categories you'd like to see first.</p>
               </div>
 
               <div className="flex flex-col gap-2">
-                {categories.map((cat) => (
-                  <button
-                    key={cat.id}
-                    onClick={() => handleVote(cat.id)}
-                    disabled={voted !== null}
-                    className={`w-full text-left p-3 rounded-2xl border text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
-                      voted === cat.id
-                        ? "border-orange-500 bg-orange-50/50 text-orange-950 font-bold"
-                        : voted !== null
-                        ? "border-stone-100 bg-stone-50/30 text-stone-400"
-                        : "border-stone-200 bg-stone-50 hover:bg-stone-100 text-stone-700"
-                    }`}
-                  >
-                    <span>{cat.name}</span>
-                    <span className={`text-[10px] ${voted === cat.id ? "text-orange-700 font-bold" : "text-stone-400"}`}>
-                      {cat.votes.toLocaleString()} votes
-                    </span>
-                  </button>
-                ))}
+                {categories.map((cat) => {
+                  const isSelected = selectedCategories.includes(cat.id);
+                  return (
+                    <button
+                      key={cat.id}
+                      onClick={() => handleToggleCategory(cat.id)}
+                      disabled={isPollDone}
+                      className={`w-full text-left p-3 rounded-2xl border text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
+                        isSelected
+                          ? "border-orange-500 bg-orange-50/50 text-orange-950 font-bold"
+                          : isPollDone
+                          ? "border-stone-100 bg-stone-50/30 text-stone-400"
+                          : "border-stone-200 bg-stone-50 hover:bg-stone-100 text-stone-700"
+                      }`}
+                    >
+                      <span>{cat.name}</span>
+                      {isSelected && (
+                        <svg className="w-4 h-4 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                        </svg>
+                      )}
+                    </button>
+                  );
+                })}
               </div>
 
-              {voted && (
-                <div className="text-[10px] md:text-[11px] text-orange-850 font-semibold text-center mt-1 animate-pulse">
-                  Thank you. We will prioritize this category for the initial rollout.
+              {!isPollDone && selectedCategories.length > 0 && (
+                <button
+                  onClick={handlePollDone}
+                  className="mt-2 w-full py-2.5 bg-stone-900 text-white text-xs font-bold rounded-xl hover:bg-stone-800 transition-colors"
+                >
+                  Done
+                </button>
+              )}
+
+              {isPollDone && (
+                <div className="text-[10px] md:text-[11px] text-orange-850 font-semibold text-center mt-1">
+                  Thanks for your input! We'll prioritize these categories.
                 </div>
               )}
             </div>
@@ -349,10 +364,10 @@ export default function Home() {
           <section id="registry-signup" className="py-10 md:py-14 border-t border-stone-250/60 flex flex-col items-center gap-6 md:gap-8 text-center max-w-2xl mx-auto w-full">
             <div className="flex flex-col gap-3">
               <h2 className="text-2xl md:text-3xl font-serif font-bold text-stone-900 leading-tight">
-                Help build the future of word-of-mouth.
+                Join the early access list.
               </h2>
               <p className="text-xs md:text-sm text-stone-600 leading-relaxed font-serif">
-                By joining Campfire today, you secure your place in the founding registry. Early accounts are permanently designated with the Founding Member badge across the network.
+                Sign up today to get notified when we open our doors. Early members will get a special badge on their profile as a thank you for supporting the idea.
               </p>
             </div>
 
@@ -369,23 +384,16 @@ export default function Home() {
               </Show>
 
               <Show when="signed-in">
-                {/* Clean, Non-Emoji Founding Member Badge UI */}
-                <div className="w-full max-w-sm border border-stone-250/80 rounded-2xl bg-white shadow-sm p-5 md:p-6 flex flex-col gap-4 text-left relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-[120px] h-[120px] bg-gradient-to-bl from-orange-200/20 to-transparent rounded-full blur-xl pointer-events-none" />
-                  <div className="flex items-center justify-between border-b border-stone-100 pb-3">
-                    <span className="text-[10px] md:text-xs font-mono font-bold tracking-widest text-stone-400">CAMPFIRE REGISTRY</span>
-                    <span className="text-[9px] md:text-[10px] font-bold text-orange-850 bg-orange-50 border border-orange-200 px-2 py-0.5 rounded-full uppercase tracking-wider">
-                      Founding Member
-                    </span>
+                <div className="w-full max-w-sm border border-emerald-200 bg-emerald-50/50 rounded-2xl p-5 md:p-6 flex flex-col gap-2 text-center">
+                  <div className="text-emerald-600 mb-1 flex justify-center">
+                    <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <div className="text-[9px] md:text-[10px] text-stone-400 font-bold uppercase tracking-wider">Member ID</div>
-                    <div className="font-mono text-xs md:text-sm text-stone-850 font-bold">#10,483</div>
-                  </div>
-                  <div className="flex flex-col gap-1">
-                    <div className="text-[9px] md:text-[10px] text-stone-400 font-bold uppercase tracking-wider">Registry Node</div>
-                    <div className="text-[11px] md:text-xs text-stone-700 font-semibold truncate">guides@campfire.net</div>
-                  </div>
+                  <h3 className="font-serif font-bold text-stone-900 text-lg">You're on the list</h3>
+                  <p className="text-xs text-stone-600">
+                    You have successfully registered for early access. We'll email you when Campfire opens up.
+                  </p>
                 </div>
               </Show>
             </div>
