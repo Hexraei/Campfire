@@ -3,6 +3,17 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
+      "env": [
+        "DATABASE_URL",
+        "CLERK_SECRET_KEY",
+        "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
+        "CLERK_WEBHOOK_SECRET",
+        "UPLOADTHING_TOKEN",
+        "UPLOADTHING_SECRET",
+        "UPLOADTHING_APP_ID",
+        "GEMINI_API_KEY",
+        "RESEND_API_KEY"
+      ],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "dev": {
