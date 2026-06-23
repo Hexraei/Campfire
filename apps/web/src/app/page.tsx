@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { SignInButton, SignUpButton, Show, UserButton, useAuth, useClerk } from "@clerk/nextjs";
+import { SignInButton, SignUpButton, SignOutButton, Show, UserButton, useAuth, useClerk } from "@clerk/nextjs";
 import { savePollPreferences } from "./actions";
 
 export default function Home() {
@@ -101,7 +101,11 @@ export default function Home() {
                 <span className="text-[9px] md:text-xs text-stone-500 font-semibold bg-stone-100 border border-stone-200 px-2 py-0.5 md:px-3 md:py-1 rounded-full">
                   Founding Member
                 </span>
-                <UserButton />
+                <SignOutButton>
+                  <button className="text-[10px] md:text-xs font-medium text-stone-500 hover:text-stone-900 transition-colors cursor-pointer px-2 py-1 bg-stone-100 hover:bg-stone-200 rounded-full">
+                    Sign Out
+                  </button>
+                </SignOutButton>
               </div>
             </Show>
           </div>
