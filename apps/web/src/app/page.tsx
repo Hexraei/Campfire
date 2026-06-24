@@ -78,23 +78,13 @@ export default function Home() {
         
         {/* Minimal Header */}
         <header className="h-16 md:h-20 flex items-center justify-between border-b border-stone-200/60">
-          <div className="flex items-center gap-2 md:gap-3">
-            {/* Elegant Vector Flame Icon */}
-            <svg
-              className="w-4 h-4 md:w-5 md:h-5 text-orange-600"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z"
-              />
-            </svg>
-            <span className="text-base md:text-lg font-serif font-bold tracking-tight text-stone-850">
+          <div className="flex items-center gap-2.5 md:gap-3.5">
+            <img
+              src="/logo-transparent.png"
+              alt="Campfire Logo"
+              className="w-7 h-7 md:w-9 md:h-9 object-contain"
+            />
+            <span className="text-xl md:text-2xl font-serif font-black tracking-wide text-stone-900 drop-shadow-sm">
               Campfire
             </span>
           </div>
