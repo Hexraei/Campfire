@@ -30,7 +30,7 @@ export default function PrivacyPage() {
               alt="Campfire Logo"
               className="w-7 h-7 md:w-9 md:h-9 object-contain"
             />
-            <span className="text-xl md:text-2xl font-serif font-black tracking-wide text-stone-900 drop-shadow-sm">
+            <span className="text-3xl md:text-4xl font-normal tracking-wide text-stone-900 drop-shadow-sm" style={{ fontFamily: "'Jersey 25', sans-serif" }}>
               Campfire
             </span>
           </Link>
