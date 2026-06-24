@@ -201,45 +201,86 @@ export default function Home() {
             </div>
           </section>
 
-          {/* New Section: What We Are Building (About Us, Buyers & Owners) */}
-          <section className="p-8 md:p-10 rounded-3xl border border-stone-200 bg-stone-900 text-stone-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col gap-10 my-4 md:my-6">
-            <div className="flex flex-col gap-4 max-w-3xl">
-              <span className="text-[11px] font-mono font-bold text-orange-400 bg-orange-950/50 border border-orange-500/30 px-3 py-1 rounded-full uppercase tracking-wider w-fit">
-                About Campfire
-              </span>
-              <h2 className="text-2xl md:text-4xl font-serif font-bold text-white leading-tight">
-                A community built by and for the people.
-              </h2>
-              <p className="text-sm md:text-base text-stone-300 leading-relaxed font-serif">
-                Campfire is a platform where people can get authentic reviews directly from people who actually own and use products as real consumers, without any brands or third-party sponsorship involved. If you own a product, you can share your real, unfiltered experience. No algorithms pushing ads, no affiliate links—just the truth.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-stone-800">
-              {/* For Buyers */}
-              <div className="flex flex-col gap-3 p-6 rounded-2xl bg-stone-850 border border-stone-800">
-                <div className="flex items-center gap-2.5 text-orange-400">
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                  </svg>
-                  <h3 className="font-serif font-bold text-lg text-white">For Buyers</h3>
+          {/* New Section: What We Are Building (Full-Width Dark Breakout) */}
+          <section className="w-[100vw] relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] bg-[#171615] text-stone-100 py-16 md:py-24 shadow-[0_10px_40px_rgb(0,0,0,0.2)] my-2">
+            <div className="max-w-4xl mx-auto px-5 md:px-6 flex flex-col gap-16">
+              
+              {/* Header */}
+              <div className="flex flex-col gap-4 max-w-3xl">
+                <div className="text-sm md:text-base font-serif italic text-stone-400">
+                  The idea behind Campfire —
                 </div>
-                <p className="text-xs md:text-sm text-stone-300 leading-relaxed">
-                  Everyday consumers looking for honest, long-term feedback before spending their hard-earned money. As a buyer on Campfire, you get direct access to verified product timelines and the ability to ask specific questions directly to real owners, knowing every response comes from someone who actually owns the device.
+                <h2 className="text-3xl md:text-5xl font-serif font-extrabold text-white tracking-tight leading-[1.15]">
+                  A community built by and for the people.
+                </h2>
+                <p className="text-base md:text-lg text-stone-300 leading-relaxed font-serif mt-2">
+                  Campfire is a platform where, without any brands or third-party sponsorship involved, you can get authentic reviews directly from people who actually own and use products as real consumers. If you own a product, you can share your real, unfiltered experience. No algorithms pushing ads, no affiliate links—just the truth.
                 </p>
               </div>
 
-              {/* For Owners */}
-              <div className="flex flex-col gap-3 p-6 rounded-2xl bg-stone-850 border border-stone-800">
-                <div className="flex items-center gap-2.5 text-emerald-400">
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                  </svg>
-                  <h3 className="font-serif font-bold text-lg text-white">For Owners</h3>
+              {/* Two Pillars: Scannable & Distinct Layout */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 pt-10 border-t border-stone-800/80">
+                
+                {/* For Buyers */}
+                <div className="flex flex-col gap-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400 shadow-inner">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-serif font-bold text-xl text-white">For Buyers</h3>
+                      <div className="text-xs font-mono text-orange-400/90 mt-0.5">WHO ARE THEY? EVERYDAY CONSUMERS</div>
+                    </div>
+                  </div>
+
+                  <ul className="flex flex-col gap-4 text-sm text-stone-300">
+                    <li className="flex items-start gap-3">
+                      <span className="text-orange-400 font-bold text-base leading-none mt-0.5">•</span>
+                      <span><strong>Zero Sponsorships:</strong> Read long-term feedback from people who spent their own hard-earned money.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-orange-400 font-bold text-base leading-none mt-0.5">•</span>
+                      <span><strong>Verified Timelines:</strong> Track how a product actually holds up from Day 1 to Year 3, rather than just a first-day unboxing.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-orange-400 font-bold text-base leading-none mt-0.5">•</span>
+                      <span><strong>Direct Q&A:</strong> Ask ultra-specific questions and get answers exclusively from verified owners.</span>
+                    </li>
+                  </ul>
                 </div>
-                <p className="text-xs md:text-sm text-stone-300 leading-relaxed">
-                  Real users who want to share their unvarnished, unfiltered experiences. By uploading a simple proof of purchase, you unlock the ability to log your ongoing ownership journey (from Day 1 to Year 3) and help fellow consumers make informed decisions without brand filtering or sponsored bias.
-                </p>
+
+                {/* For Owners */}
+                <div className="flex flex-col gap-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shadow-inner">
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="font-serif font-bold text-xl text-white">For Owners</h3>
+                      <div className="text-xs font-mono text-emerald-400/90 mt-0.5">WHO ARE THEY? REAL USERS</div>
+                    </div>
+                  </div>
+
+                  <ul className="flex flex-col gap-4 text-sm text-stone-300">
+                    <li className="flex items-start gap-3">
+                      <span className="text-emerald-400 font-bold text-base leading-none mt-0.5">•</span>
+                      <span><strong>Proof of Purchase:</strong> Upload a simple store receipt to permanently unlock verified owner posting rights.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-emerald-400 font-bold text-base leading-none mt-0.5">•</span>
+                      <span><strong>Unfiltered Logging:</strong> Share your unvarnished experiences exactly as they happen without brand filtering or PR moderation.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-emerald-400 font-bold text-base leading-none mt-0.5">•</span>
+                      <span><strong>Help Fellow Consumers:</strong> Build the ultimate knowledge base to protect others from buying overhyped or unreliable tech.</span>
+                    </li>
+                  </ul>
+                </div>
+
               </div>
             </div>
           </section>
