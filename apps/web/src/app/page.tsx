@@ -517,8 +517,15 @@ export default function Home() {
         </main>
 
         {/* Footer */}
-        <footer className="py-12 border-t border-stone-200/60 text-center text-xs text-stone-500">
-          &copy; {new Date().getFullYear()} Campfire. Restoring the human scale to product discovery.
+        <footer className="py-12 border-t border-stone-200/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500">
+          <div>
+            &copy; {new Date().getFullYear()} Campfire. A community built by and for the people.
+          </div>
+          <div className="flex items-center gap-6">
+            <a href="/privacy" className="hover:text-stone-800 transition-colors">Privacy Policy</a>
+            <a href="/terms" className="hover:text-stone-800 transition-colors">Terms of Use</a>
+            <a href="/disclaimer" className="hover:text-stone-800 transition-colors">Compliance & Legal</a>
+          </div>
         </footer>
 
       </div>

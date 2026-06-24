@@ -14,8 +14,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Campfire - Verified Ownership Network",
-  description: "Learn about products directly from verified owners who actually use them.",
+  title: "Campfire",
+  description: "Campfire is a community built by and for the people. Get authentic product reviews directly from verified owners, with zero brand sponsorship, affiliate links, or filtering.",
+  keywords: ["authentic product reviews", "verified owners", "real consumer reviews", "unsponsored tech reviews", "campfire community"],
+  authors: [{ name: "Campfire Community" }],
+  robots: "index, follow",
+  openGraph: {
+    title: "Campfire",
+    description: "Campfire is a community built by and for the people. Get authentic product reviews directly from verified owners, with zero brand sponsorship, affiliate links, or filtering.",
+    type: "website",
+    siteName: "Campfire",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Campfire",
+    description: "Campfire is a community built by and for the people. Get authentic product reviews directly from verified owners, with zero brand sponsorship, affiliate links, or filtering.",
+  },
 };
 
 export const viewport: Viewport = {
