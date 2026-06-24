@@ -286,39 +286,36 @@ export default function Home() {
           </section>
 
           {/* New Section: Interactive Visual Timeline & Verified Q&A Previews */}
-          <section className="flex flex-col gap-4 py-2 md:py-4">
+          <section className="flex flex-col gap-8 py-4 md:py-8">
+            
+            {/* Section Header */}
+            <div className="flex flex-col gap-2 border-b border-stone-200/80 pb-6">
+              <h2 className="text-2xl md:text-3xl font-serif font-bold text-stone-900">
+                How Campfire works in practice
+              </h2>
+              <p className="text-sm text-stone-500 font-serif">
+                Explore the verified ownership tools designed to bring radical transparency to product reviews.
+              </p>
+            </div>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               
               {/* Visual Timeline Preview Card (Redesigned for authenticity/attractiveness) */}
-              <div className="p-6 rounded-3xl border border-stone-200 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.03)] hover:border-stone-300/90 transition-all duration-300 flex flex-col justify-between gap-6 relative overflow-hidden">
+              <div className="p-6 md:p-8 rounded-3xl border border-stone-200 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.03)] hover:border-stone-300/90 transition-all duration-300 flex flex-col justify-between gap-8 relative overflow-hidden">
                 
-                {/* Corner Log ID Badge */}
-                <div className="absolute top-4 right-4 pointer-events-none">
-                  <div className="bg-stone-50 border border-stone-200/60 px-2.5 py-1 rounded-md shadow-sm">
-                    <span className="text-[9px] font-mono font-bold text-stone-450 tracking-wider">
-                      LOG #832
-                    </span>
+                <div className="flex flex-col gap-2">
+                  <div className="text-xs font-serif italic text-orange-700 font-medium">
+                    01 — Verified Timeline
                   </div>
-                </div>
-
-                <div>
-                  <span className="text-[10px] font-mono font-bold text-orange-850 bg-orange-50 border border-orange-200 px-2.5 py-1 rounded-full uppercase tracking-wider">
-                    TIMELINE PREVIEW
-                  </span>
-                </div>
-                
-                <div>
-                  <h3 className="font-serif font-bold text-stone-850 text-lg mt-1">Laptop Ownership Story</h3>
-                  <p className="text-xs text-stone-500 mt-1">Authentic timeline updates logged directly by a verified owner.</p>
+                  <h3 className="font-serif font-bold text-stone-850 text-xl">Laptop Ownership Story</h3>
+                  <p className="text-xs text-stone-500">Authentic timeline updates logged directly by a verified owner.</p>
                 </div>
 
                 <div className="flex flex-col gap-6 border-l border-stone-200/80 pl-5 ml-2.5 mt-2">
                   <div className="relative">
                     <div className="absolute top-1.5 left-[-25px] w-2.5 h-2.5 rounded-full bg-stone-300 border-2 border-white shadow-sm" />
-                    <div className="flex items-center justify-between text-xs font-mono font-semibold text-stone-400">
-                      <span>Day 1</span>
-                      <span className="text-[10px] text-emerald-600 font-medium font-sans">Battery: 100% Health</span>
+                    <div className="text-xs font-mono font-semibold text-stone-400">
+                      Day 1
                     </div>
                     <div className="text-xs text-stone-850 font-medium mt-1 leading-relaxed">
                       "Out of the box. Keyboard feels tactile, display is vibrant. Battery hits ~9 hours."
@@ -327,9 +324,8 @@ export default function Home() {
 
                   <div className="relative">
                     <div className="absolute top-1.5 left-[-25px] w-2.5 h-2.5 rounded-full bg-stone-300 border-2 border-white shadow-sm" />
-                    <div className="flex items-center justify-between text-xs font-mono font-semibold text-stone-400">
-                      <span>Month 6</span>
-                      <span className="text-[10px] text-amber-600 font-medium font-sans">Battery: 92% Health</span>
+                    <div className="text-xs font-mono font-semibold text-stone-400">
+                      Month 6
                     </div>
                     <div className="text-xs text-stone-850 font-medium mt-1 leading-relaxed">
                       "Display is still great, but the left fan has developed a slight whine under heavy load. Battery now holding ~7.5 hours."
@@ -338,9 +334,8 @@ export default function Home() {
 
                   <div className="relative">
                     <div className="absolute top-1.5 left-[-25px] w-2.5 h-2.5 rounded-full bg-orange-500 border-2 border-white shadow-sm" />
-                    <div className="flex items-center justify-between text-xs font-mono font-semibold text-orange-700">
-                      <span>Year 1</span>
-                      <span className="text-[10px] text-orange-700 font-bold font-sans">Battery: 81% Health</span>
+                    <div className="text-xs font-mono font-semibold text-orange-700">
+                      Year 1
                     </div>
                     <div className="text-xs text-stone-850 font-medium mt-1 leading-relaxed">
                       "Left fan replaced under warranty. Keyboard still solid, battery is now firmly at 6 hours. Glad I didn't buy the base model."
@@ -350,16 +345,17 @@ export default function Home() {
               </div>
 
               {/* Q&A Gated Answer Mockup Card (Redesigned for authenticity/attractiveness) */}
-              <div className="p-6 rounded-3xl border border-stone-200 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.03)] hover:border-stone-300/90 transition-all duration-300 flex flex-col justify-between gap-6">
-                <div>
-                  <span className="text-[10px] font-mono font-bold text-stone-500 bg-stone-100 border border-stone-250 px-2.5 py-1 rounded-full uppercase tracking-wider">
-                    VERIFIED Q&A PREVIEW
-                  </span>
-                  <h3 className="font-serif font-bold text-stone-850 text-lg mt-3">Gated Answer Interface</h3>
-                  <p className="text-xs text-stone-500 mt-1">Gating answers to verified buyers ensures spam-free product support.</p>
+              <div className="p-6 md:p-8 rounded-3xl border border-stone-200 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.03)] hover:border-stone-300/90 transition-all duration-300 flex flex-col justify-between gap-8">
+                <div className="flex flex-col gap-2">
+                  <div className="text-xs font-serif italic text-stone-500 font-medium">
+                    02 — Verified Q&A
+                  </div>
+                  <h3 className="font-serif font-bold text-stone-850 text-xl">Gated Answer Interface</h3>
+                  <p className="text-xs text-stone-500">Gating answers to verified buyers ensures spam-free product support.</p>
                 </div>
 
                 {/* Question */}
+
                 <div className="p-4 rounded-2xl bg-stone-50 border border-stone-200/60 flex gap-3">
                   <div className="w-8 h-8 rounded-full bg-stone-200 text-[10px] font-bold text-stone-600 flex items-center justify-center shrink-0 shadow-inner">
                     MK
