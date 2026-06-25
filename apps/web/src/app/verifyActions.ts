@@ -58,32 +58,24 @@ export async function verifyReceiptAction(formData: FormData) {
     const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
     // STRICT SINGLE-REQUEST AI INVOCATION (RPM & Quota Protection)
-    // We execute exactly ONE request to gemini-3.1-flash-lite without retry loops.
-    const response = await ai.models.generateContent({
+    // We execute exactly ONE request to gemini-3.1-flash-lite using the modern Google Interactions API (GA June 2026).
+    const interaction = await ai.interactions.create({
       model: "gemini-3.1-flash-lite",
-      contents: [
+      input: [
         {
-          role: "user",
-          parts: [
-            {
-              inlineData: {
-                data: base64Data,
-                mimeType: mimeType,
-              },
-            },
-            {
-              text: "Analyze this receipt image. Extract ONLY the primary consumer product name (e.g. 'iPhone 16 Pro', 'ThinkPad X1 Carbon') and the date of purchase (YYYY-MM-DD). Return pure JSON object with keys: 'valid_receipt' (boolean), 'product_name' (string or null), 'purchase_date' (string or null), 'error_reason' (string or null if invalid). Ignore all prices, personal names, store addresses, and payment card details. Output ONLY pure JSON without markdown code blocks.",
-            },
-          ],
+          type: "text",
+          text: "Analyze this receipt image. Extract ONLY the primary consumer product name (e.g. 'iPhone 16 Pro', 'ThinkPad X1 Carbon') and the date of purchase (YYYY-MM-DD). Return pure JSON object with keys: 'valid_receipt' (boolean), 'product_name' (string or null), 'purchase_date' (string or null), 'error_reason' (string or null if invalid). Ignore all prices, personal names, store addresses, and payment card details. Output ONLY pure JSON without markdown code blocks.",
+        },
+        {
+          type: "image",
+          data: base64Data,
+          mime_type: mimeType,
         },
       ],
-      config: {
-        responseMimeType: "application/json",
-        temperature: 0.1,
-      },
+      response_mime_type: "application/json",
     });
 
-    const textResponse = response.text;
+    const textResponse = interaction.output_text;
     if (!textResponse) {
       return { success: false, error: "AI returned an empty response. Please ensure the image is clear and try again." };
     }
