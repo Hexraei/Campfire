@@ -41,6 +41,8 @@ export const verifications = pgTable("verifications", {
     .references(() => products.id, { onDelete: "cascade" })
     .notNull(),
   invoiceUrl: varchar("invoice_url", { length: 1024 }).notNull(),
+  productName: varchar("product_name", { length: 256 }),
+  purchaseDate: varchar("purchase_date", { length: 100 }),
   status: varchar("status", { length: 50 }).default("pending").notNull(), // 'pending' | 'approved' | 'rejected'
   verifiedAt: timestamp("verified_at"),
   createdAt: timestamp("created_at").defaultNow().notNull(),

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { SignInButton, SignUpButton, Show, UserButton, useAuth, useClerk } from "@clerk/nextjs";
 import { savePollPreferences, getPollPreferences } from "./actions";
 
@@ -98,6 +99,10 @@ export default function Home() {
             </Show>
             <Show when="signed-in">
               <div className="flex items-center gap-2 md:gap-4">
+                <Link href="/verify" className="text-xs font-bold text-orange-600 hover:text-orange-700 bg-orange-50 border border-orange-200 px-3 py-1.5 rounded-full shadow-sm transition-all flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange-600 animate-pulse" />
+                  Verify Ownership
+                </Link>
                 <span className="text-[9px] md:text-xs text-stone-500 font-semibold bg-stone-100 border border-stone-200 px-2 py-0.5 md:px-3 md:py-1 rounded-full">
                   Founding Member
                 </span>
@@ -134,12 +139,20 @@ export default function Home() {
                 </button>
               </Show>
               <Show when="signed-in">
-                <button
-                  onClick={scrollToRegistry}
-                  className="w-full sm:w-auto text-center text-sm font-bold text-stone-900 bg-white border border-stone-200 hover:bg-stone-50 transition-colors rounded-full px-6 py-3.5 shadow-sm active:scale-97 cursor-pointer"
-                >
-                  View Registration Status
-                </button>
+                <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                  <Link
+                    href="/verify"
+                    className="w-full sm:w-auto text-center text-sm font-bold text-stone-950 bg-orange-500 hover:bg-orange-400 transition-colors rounded-full px-6 py-3.5 shadow-md active:scale-97 cursor-pointer flex items-center justify-center gap-2"
+                  >
+                    Verify Your Hardware (AI Engine)
+                  </Link>
+                  <button
+                    onClick={scrollToRegistry}
+                    className="w-full sm:w-auto text-center text-sm font-bold text-stone-900 bg-white border border-stone-200 hover:bg-stone-50 transition-colors rounded-full px-6 py-3.5 shadow-sm active:scale-97 cursor-pointer"
+                  >
+                    View Registration Status
+                  </button>
+                </div>
               </Show>
             </div>
           </section>
