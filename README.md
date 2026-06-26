@@ -2,6 +2,8 @@
 
 Campfire is a verified word-of-mouth network. Users learn about products from people who actually own them.
 
+Campfire is a community built by and for consumers.
+
 ---
 
 ## The Problem
@@ -39,3 +41,5 @@ The app uses these tools:
 ---
 
 If you find a bug or have an idea, open an issue.
+
+Created by Hexraei.
