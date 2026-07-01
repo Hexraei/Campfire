@@ -12,7 +12,7 @@ export function TransitionLink({
   ...props
 }: ComponentProps<typeof Link>) {
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -21,9 +21,8 @@ export function TransitionLink({
 
   const handleTransition = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();
-    startTransition(() => {
-      router.push(href.toString());
-    });
+    setIsPending(true);
+    router.push(href.toString());
   };
 
   return (
