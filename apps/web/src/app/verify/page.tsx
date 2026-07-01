@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
+import { TransitionLink as Link } from "@/components/TransitionLink";
 import { UserButton, useAuth } from "@clerk/nextjs";
 import { verifyReceiptAction } from "@/app/verifyActions";
 
@@ -117,10 +117,10 @@ export default function VerifyPage() {
           </Link>
           <div className="flex items-center gap-4">
             <Link
-              href="/"
+              href="/products"
               className="text-sm font-medium text-stone-400 hover:text-stone-200 transition-colors"
             >
-              Return Home
+              Hardware Catalog
             </Link>
             {isLoaded && isSignedIn && <UserButton />}
           </div>
