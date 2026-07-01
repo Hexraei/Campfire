@@ -2,7 +2,7 @@ import { db } from "@/db";
 import { products, timelinePosts, users, verifications, questions, answers } from "@/db/schema";
 import { eq, and, desc } from "drizzle-orm";
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import { TransitionLink as Link } from "@/components/TransitionLink";
 import { Metadata } from "next";
 
 interface PageProps {

@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { products, verifications } from "@/db/schema";
 import { eq, sql } from "drizzle-orm";
-import Link from "next/link";
+import { TransitionLink as Link } from "@/components/TransitionLink";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
