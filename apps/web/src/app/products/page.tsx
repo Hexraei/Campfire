@@ -32,8 +32,11 @@ export default async function ProductsCatalogPage() {
     <div className="min-h-screen bg-stone-50 flex flex-col font-sans">
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-stone-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link href="/" className="font-serif font-bold text-xl text-stone-900 tracking-tight flex items-center gap-2">
-            <span className="text-orange-600 text-2xl leading-none">↟</span> Campfire
+          <Link href="/" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
+            <img src="/logo-transparent.png" alt="Campfire" className="w-7 h-7 object-contain" />
+            <span className="text-2xl font-normal tracking-wide text-stone-900" style={{ fontFamily: "'Jersey 25', sans-serif" }}>
+              Campfire
+            </span>
           </Link>
           <div className="text-sm font-medium text-stone-500">
             Hardware Catalog
