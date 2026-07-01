@@ -9,6 +9,8 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+export const revalidate = 3600; // Cache the product hub for 1 hour
+
 export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const params = await props.params;
   const [product] = await db

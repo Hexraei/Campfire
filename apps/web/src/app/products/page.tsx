@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description: "Browse our catalog of hardware products backed by authentic, verified owner experiences.",
 };
 
+export const revalidate = 3600; // Cache the catalog for 1 hour
+
 export default async function ProductsCatalogPage() {
   // Fetch all products and count their verified owners
   const catalog = await db
