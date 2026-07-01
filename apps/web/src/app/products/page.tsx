@@ -5,7 +5,7 @@ import { TransitionLink as Link } from "@/components/TransitionLink";
 import { Metadata } from "next";
 import { CatalogSearch } from "@/components/CatalogSearch";
 import { CatalogSidebar } from "@/components/CatalogSidebar";
-import { requireAdmin } from "@/lib/auth"; // Assuming this was created
+
 
 export const metadata: Metadata = {
   title: "Campfire | Hardware Catalog",

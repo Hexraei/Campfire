@@ -46,9 +46,9 @@ export function TransitionLink({
         </div>,
         document.body
       )}
-      <Link href={href} onClick={handleTransition} {...props}>
+      <a href={href.toString()} onClick={handleTransition} {...props}>
         {children}
-      </Link>
+      </a>
     </>
   );
 }
