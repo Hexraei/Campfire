@@ -113,16 +113,16 @@ export default function Home() {
           <section className="flex flex-col gap-5 text-left max-w-3xl">
             {/* Refined intro indicator */}
             <div className="text-[10px] md:text-xs font-mono font-bold tracking-wider text-orange-850/80 uppercase">
-              First-hand experiences from verified owners
+              Reviews from people who own the product
             </div>
 
             {/* Core Narrative Headline */}
             <h1 className="text-3xl md:text-5xl font-serif font-extrabold tracking-tight leading-[1.1] text-stone-900 text-wrap-balance">
-              Finding honest product reviews shouldn't be this hard.
+              Finding real product reviews shouldn't be hard.
             </h1>
             
             <p className="text-base md:text-lg text-stone-600 leading-relaxed font-serif text-wrap-pretty">
-              It's hard to tell what's real online anymore. Between sponsored content and SEO articles, finding a genuine opinion is frustrating. Campfire connects you directly with verified owners who actually use the products you're looking for.
+              It's hard to find reviews you can trust. Campfire connects you with people who have proven they own the products they are writing about.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 mt-1.5">

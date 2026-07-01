@@ -6,10 +6,11 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const params = await props.params;
   const [product] = await db
     .select({ name: products.name, description: products.description })
     .from(products)
@@ -21,12 +22,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${product.name} Reviews & First-hand Experiences | Campfire`,
-    description: `Read authentic reviews and first-hand experiences for the ${product.name} from verified owners.`,
+    title: `${product.name} Reviews | Campfire`,
+    description: `Read reviews for ${product.name} from verified owners.`,
   };
 }
 
-export default async function ProductPage({ params }: PageProps) {
+export default async function ProductPage(props: PageProps) {
+  const params = await props.params;
+  
   // 1. Fetch Product
   const [product] = await db
     .select()
@@ -120,7 +123,7 @@ export default async function ProductPage({ params }: PageProps) {
         {/* Timeline Experiences */}
         <section className="flex flex-col gap-6">
           <h2 className="text-2xl font-serif font-bold text-stone-900 flex items-center gap-3">
-            First-hand Experiences
+            Reviews
             <span className="text-sm font-medium text-stone-500 bg-stone-200 px-2 py-0.5 rounded-full">
               {experiences.length}
             </span>
@@ -128,7 +131,7 @@ export default async function ProductPage({ params }: PageProps) {
           
           <div className="flex flex-col gap-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-stone-200 before:to-transparent">
             {experiences.length === 0 ? (
-              <div className="text-stone-500 text-sm pl-12 md:pl-0 md:text-center">No experiences shared yet.</div>
+              <div className="text-stone-500 text-sm pl-12 md:pl-0 md:text-center">No reviews yet.</div>
             ) : (
               experiences.map((exp, idx) => (
                 <div key={exp.id} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">

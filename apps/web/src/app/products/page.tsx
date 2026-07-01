@@ -45,10 +45,10 @@ export default async function ProductsCatalogPage() {
         <div className="flex flex-col gap-8">
           <div>
             <h1 className="text-3xl font-serif font-extrabold text-stone-900">
-              Verified Hardware Catalog
+              Hardware Catalog
             </h1>
             <p className="text-stone-600 mt-2 max-w-2xl">
-              Explore products backed by real, verified owners. No sponsored fluff, just authentic long-term experiences.
+              Browse products and read reviews from people who have verified they own them.
             </p>
           </div>
 
@@ -79,7 +79,7 @@ export default async function ProductsCatalogPage() {
                 </div>
 
                 <div className="mt-auto pt-4 flex items-center text-sm font-semibold text-stone-900 group-hover:text-orange-600 transition-colors">
-                  Read Experiences <span className="ml-1 group-hover:translate-x-1 transition-transform">→</span>
+                  Read Reviews <span className="ml-1 group-hover:translate-x-1 transition-transform">→</span>
                 </div>
               </Link>
             ))}
