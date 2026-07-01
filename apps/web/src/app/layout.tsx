@@ -14,13 +14,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Campfire",
+  title: {
+    template: "%s | Campfire",
+    default: "Campfire",
+  },
   description: "Campfire is a community built by and for the people. Get authentic product reviews directly from verified owners, with zero brand sponsorship, affiliate links, or filtering.",
   keywords: ["authentic product reviews", "verified owners", "real consumer reviews", "unsponsored tech reviews", "campfire community"],
   authors: [{ name: "Campfire Community" }],
   robots: "index, follow",
   openGraph: {
-    title: "Campfire",
+    title: {
+      template: "%s | Campfire",
+      default: "Campfire",
+    },
     description: "Campfire is a community built by and for the people. Get authentic product reviews directly from verified owners, with zero brand sponsorship, affiliate links, or filtering.",
     type: "website",
     siteName: "Campfire",
