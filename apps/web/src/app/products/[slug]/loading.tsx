@@ -1,6 +1,6 @@
 export default function GlobalLoading() {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-xl transition-all duration-300">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-stone-500/60 backdrop-blur-md transition-all duration-300">
       <div className="flex flex-col items-center gap-4">
         {/* Campfire Logo Animation */}
         <div className="relative flex items-center justify-center w-16 h-16">
