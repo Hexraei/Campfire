@@ -40,8 +40,13 @@ export default async function ProductsCatalogPage() {
               Campfire
             </span>
           </Link>
-          <div className="text-sm font-medium text-stone-500">
-            Hardware Catalog
+          <div className="flex items-center gap-6">
+            <Link href="/verify" className="text-sm font-medium text-stone-500 hover:text-stone-900 transition-colors">
+              Verify Product
+            </Link>
+            <div className="text-sm font-medium text-stone-500 hidden sm:block">
+              Hardware Catalog
+            </div>
           </div>
         </div>
       </header>

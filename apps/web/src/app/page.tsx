@@ -90,6 +90,9 @@ export default function Home() {
             </span>
           </div>
           <div className="flex items-center gap-3">
+            <Link href="/verify" className="text-sm font-medium text-stone-500 hover:text-stone-900 transition-colors hidden sm:block">
+              Verify Product
+            </Link>
             <Show when="signed-out">
               <SignInButton mode="modal">
                 <button className="text-xs font-medium text-stone-600 hover:text-stone-900 transition-colors cursor-pointer px-2 py-1">

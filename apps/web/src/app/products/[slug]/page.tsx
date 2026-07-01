@@ -97,12 +97,17 @@ export default async function ProductPage(props: PageProps) {
           <Link href="/products" className="text-stone-400 hover:text-stone-900 transition-colors text-sm font-medium">
             ← Back to Catalog
           </Link>
-          <Link href="/" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
-            <img src="/logo-transparent.png" alt="Campfire" className="w-6 h-6 object-contain" />
-            <span className="text-xl font-normal tracking-wide text-stone-900" style={{ fontFamily: "'Jersey 25', sans-serif" }}>
-              Campfire
-            </span>
-          </Link>
+          <div className="flex items-center gap-6">
+            <Link href="/verify" className="text-sm font-medium text-stone-500 hover:text-stone-900 transition-colors hidden sm:block">
+              Verify Product
+            </Link>
+            <Link href="/" className="flex items-center gap-2.5 hover:opacity-80 transition-opacity">
+              <img src="/logo-transparent.png" alt="Campfire" className="w-6 h-6 object-contain" />
+              <span className="text-xl font-normal tracking-wide text-stone-900" style={{ fontFamily: "'Jersey 25', sans-serif" }}>
+                Campfire
+              </span>
+            </Link>
+          </div>
         </div>
       </header>
 
