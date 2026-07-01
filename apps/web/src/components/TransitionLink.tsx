@@ -1,9 +1,10 @@
 "use client";
 
-import { useTransition } from "react";
+import { useTransition, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ComponentProps } from "react";
+import { createPortal } from "react-dom";
 
 export function TransitionLink({
   href,
@@ -12,6 +13,11 @@ export function TransitionLink({
 }: ComponentProps<typeof Link>) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleTransition = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();
@@ -22,8 +28,8 @@ export function TransitionLink({
 
   return (
     <>
-      {isPending && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-stone-500/60 backdrop-blur-md transition-all duration-300">
+      {isPending && mounted && document.body && createPortal(
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-stone-500/60 backdrop-blur-md transition-all duration-300">
           <div className="flex flex-col items-center gap-4">
             <div className="relative flex items-center justify-center w-16 h-16">
               <div className="absolute inset-0 rounded-full border-4 border-white/20"></div>
@@ -38,7 +44,8 @@ export function TransitionLink({
               Loading
             </p>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
       <Link href={href} onClick={handleTransition} {...props}>
         {children}
