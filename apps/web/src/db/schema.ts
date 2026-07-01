@@ -28,6 +28,8 @@ export const products = pgTable("products", {
   name: varchar("name", { length: 256 }).notNull(),
   category: varchar("category", { length: 100 }).notNull(), // 'laptops' | 'smartphones'
   description: text("description"),
+  price: integer("price"), // Price in whole dollars or cents, depending on logic
+  imageUrl: varchar("image_url", { length: 1024 }),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
